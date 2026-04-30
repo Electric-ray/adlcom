@@ -1,44 +1,32 @@
-
-
-
-
-
-
-
-
-
-
 # AdLcom 패치판
-A AdLib Driver for serial port.
+A AdLib Driver for serial port. 
+this fork builds upon the original project by josephillips85 (adlcom) https://github.com/josephillips85/adlcom
 
 이 adlcom 패치판은 adlipt를 시리얼포트용으로 패치한 adlcom을 쉐도우 레지스터 캐시 최적화한 패치판입니다.
 시리얼널모뎀케이블을 통해서 PC에서 재생할 수 있고, 혹은 MCU를 이용한 에뮬을 통해서 재생가능합니다.
 저는 esp32-s3에 ymfm코어를 올려서 재생할 것입니다. 아마도 opl3duo 도 가능할 것으로 보입니다만, 제게는 없어서 모르겠습니다.
 실행은 adlcom opl3 로 하시면 되고, 경우에 따라서 adlcom opl3 nopatch로도 사용해 보시기 바랍니다.
 이 프로그램은 AI를 이용하여 제작되었습니다.
+---
 
 https://github.com/user-attachments/assets/99b43019-d9f4-4c33-8dfb-639724554e54
 
 https://github.com/user-attachments/assets/24d15e02-3226-4138-b29e-a322ea5683f5
 
-
 https://github.com/user-attachments/assets/ad077a73-e28b-401c-8b8c-af9b1b6015dd
 
-
-
-
-
-
+---
 
 <img width="1199" height="1519" alt="esp_ymfm" src="https://github.com/user-attachments/assets/7f283c5a-6328-4a1d-a0d5-45ce7220ee77" />
 
 저항과 콘덴서는 안정성을 올리기 위한 것으로 없으면 생략하셔도 됩니다.
 
+---
 
 
 # adlcom ElectricRay Patch 수정 내용 정리
 
-> 원본: josephillips85/adlcom (GitHub 공식 릴리즈)  
+> 원본: josephillips85/adlcom  
 > 패치: ElectricRay (https://cafe.naver.com/olddos)  
 > 빌드 환경: Open Watcom 1.9 (필수 — 2.0 이상은 세그먼트 구조 문제로 동작 안 함)  
 > 대상 하드웨어: Samsung Sens P30 (16550A UART, Windows 9x EMM386)
@@ -251,13 +239,100 @@ adlcom COM1 opl3
 
 ---
 
-## 알려진 한계
+## 한계
 
 - 115200 baud 한계로 매우 빠른 OPL3 음악에서 일부 드럼/타이밍 불안정 가능
 - shadow cache 미적용 레지스터(0xA0~0xFF)는 항상 전송되므로 대역폭 소모
 - ESP32 + ymfm 기반 OPL3 에뮬레이터 조합에서 검증됨
 
+# AdLcom
+A AdLib Driver for serial port.
 
+This is a AdLib TSR Program for MS-DOS Forked from the project AdLipt instead of using LPT port is using COM port to send the Register and value to a serial port.
+
+## Hardware Requirements
+ - OPL2Board https://www.tindie.com/products/cheerful/opl2-audio-board/ 
+ Or
+ - OPL3Duo https://www.tindie.com/products/cheerful/opl3-duo/
+ - Arduino Nano
+ - MAX232L https://www.amazon.com/gp/product/B01N42QW8X/ref=ppx_yo_dt_b_asin_title_o03_s01?ie=UTF8&psc=1
+ - 386 Computer
+ - Memory Manager JEMM or QEMM or EMM386
+
+## Download
+
+Download the driver from [the Github releases tab][2].
+
+[2]: https://github.com/josephillips85/adlcom/releases/latest
+
+## Wiring instructions
+
+Before usage you should follow the instructions from
+
+https://github.com/DhrBaksteen/ArduinoOPL2
+
+
+Connect the Arduino to the OPL2Board and Connect the MAX232 with this wiring guide.<br />
+
+MAX232 PIN          Arduino\
+VCC "<------------->" 3.3V\
+TX  "<------------->" TX\
+RX  "<------------->" RX\
+GND "<------------->" GND
+
+
+
+## Usage
+
+Load the TSR with the command:
+
+    ADLCOM
+
+assuming the  board is plugged into COM1. It will use about a
+kilobyte of RAM. It can be loaded into high memory using the DOS `LH`
+command.
+
+The TSR can be unloaded with the command:
+
+    ADLCOM UNLOAD
+
+### JEMM
+
+Load ADLCOM using the command:
+
+    JLOAD JADLCOM.DLL
+
+### Options
+
+
+- **`COM1`/`COM2`/`COM3`/`COM4`** Select COM port.
+
+- **`BLASTER=220`** Enable Sound Blaster FM emulation. ADLCOM will
+  intercept the Sound Blaster FM ports in addition to the standard
+  AdLib ports. (It won't however fake enough of a Sound Blaster to
+  pass installation checks, so this won't be very useful if you don't
+  have a Sound Blaster.)
+
+- **`NOPATCH`** Disable runtime patching. Without runtime patching the
+  TSR will be much slower, but the I/O timing will be much more
+  regular, which might help with software that's very timing
+  sensitive.
+
+- **`OPL3`** Enable support for OPL3 Board.should be used with Nuke.YKT
+  Protocol.
+
+## Source code
+
+This program compiles with OpenWatcom, use the `build.sh` script.
+You'll also need Python 3 and [the Ragel state machine
+compiler][Ragel].
+
+[Ragel]: https://www.colm.net/open-source/ragel/
+
+## Donations
+
+Who want to donate to this project. please doit via Paypal to
+https://www.paypal.com/paypalme2/josephillips85
 
 ## Copying
 
