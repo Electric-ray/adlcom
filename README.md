@@ -4,6 +4,10 @@
 
 
 
+
+
+
+
 # AdLcom 패치판
 A AdLib Driver for serial port.
 
@@ -13,7 +17,7 @@ A AdLib Driver for serial port.
 실행은 adlcom opl3 로 하시면 되고, 경우에 따라서 adlcom opl3 nopatch로도 사용해 보시기 바랍니다.
 이 프로그램은 AI를 이용하여 제작되었습니다.
 
-
+https://github.com/user-attachments/assets/99b43019-d9f4-4c33-8dfb-639724554e54
 
 https://github.com/user-attachments/assets/24d15e02-3226-4138-b29e-a322ea5683f5
 
