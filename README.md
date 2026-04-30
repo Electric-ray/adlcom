@@ -7,9 +7,18 @@ A AdLib Driver for serial port.
 실행은 adlcom opl3 로 하시면 되고, 경우에 따라서 adlcom opl3 nopatch로도 사용해 보시기 바랍니다.
 
 
+
+
+
+
 <img width="1199" height="1519" alt="esp_ymfm" src="https://github.com/user-attachments/assets/7f283c5a-6328-4a1d-a0d5-45ce7220ee77" />
 
 저항과 콘덴서는 안정성을 올리기 위한 것으로 없으면 생략하셔도 됩니다.
+
+
+
+
+
 
 
 ## Copying
